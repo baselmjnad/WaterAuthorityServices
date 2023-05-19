@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class UserActivity extends AppCompatActivity {
-    TextView tvMessage;
+    TextView tvWelcome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        tvMessage=findViewById(R.id.tvMessage);
+        tvWelcome=findViewById(R.id.tvWelcome);
         Intent intent=getIntent();
-        tvMessage.setText("Welcome  "+intent.getStringExtra("userName"));
+        tvWelcome.setText("Welcome  "+intent.getStringExtra("userName"));
     }
 }

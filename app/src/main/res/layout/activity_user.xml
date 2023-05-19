@@ -8,7 +8,9 @@
     tools:context=".UserActivity">
 
     <TextView
-        android:id="@+id/tvMessage"
+        android:id="@+id/tvWelcome"
         android:layout_width="match_parent"
+        android:textSize="24dp"
+        android:layout_margin="50dp"
         android:layout_height="wrap_content" />
 </LinearLayout>

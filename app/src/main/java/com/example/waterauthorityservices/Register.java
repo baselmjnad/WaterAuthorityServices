@@ -49,7 +49,7 @@ public class Register extends AppCompatActivity {
     }
 
     public void RegisterNewConsumer(View view) {
-
+        tvError.setText("");
         if (!TextUtils.isEmpty(etConsumerName.getText().toString()) &&
                 !TextUtils.isEmpty(etConsumerAddress.getText().toString()) &&
                 !TextUtils.isEmpty(etConsumerPhone.getText().toString()) &&
@@ -81,7 +81,7 @@ public class Register extends AppCompatActivity {
                                 public void run() {
 
                                     if (TextUtils.equals(respo,"true")){
-                                        tvError.setText("User exist, try other Username");
+                                        tvError.setText("User Exist, please try again.");
                                         userExist = true;
                                     }else {
                                         userExist = false;
