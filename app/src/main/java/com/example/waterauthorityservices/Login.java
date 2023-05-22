@@ -87,7 +87,8 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Intent intent=new Intent(Login.this,UserActivity.class);
-                                intent.putExtra("userName",logedUser.userName);
+                                intent.putExtra("userName",logedUser.userName );
+                                intent.putExtra("userId",logedUser.id.toString());
                                 startActivity(intent);
                             }
                         });
