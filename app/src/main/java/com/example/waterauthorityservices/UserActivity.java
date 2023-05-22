@@ -14,6 +14,6 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
         tvWelcome=findViewById(R.id.tvWelcome);
         Intent intent=getIntent();
-        tvWelcome.setText("Welcome  "+intent.getStringExtra("userName")+" your Id:"+intent.getStringExtra("userId"));
+        tvWelcome.setText("Welcome "+intent.getStringExtra("userName").toUpperCase());
     }
 }
