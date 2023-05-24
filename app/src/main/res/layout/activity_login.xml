@@ -69,7 +69,9 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"
         android:onClick="LoginUser"
-        android:text="Login" />
+        android:text="Login"
+        app:icon="@drawable/baseline_login_24"
+        app:iconSize="25dp" />
 
 
     <TextView
