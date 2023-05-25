@@ -82,7 +82,7 @@ public class Login extends AppCompatActivity {
 
                         String respString = response.body().string();
                         User logedUser=gson.fromJson(respString, User.class);
-
+                        if(logedUser.accountActive && logedUser.userType.equals("consumer")){
                         Login.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -91,7 +91,9 @@ public class Login extends AppCompatActivity {
                                 intent.putExtra("userId",logedUser.id.toString());
                                 startActivity(intent);
                             }
-                        });
+                        });}else {
+                            tvError.setText("User not Active or not consumer");
+                        }
                     } else {
                         tvError.setText("Username and/or password not correct");
                     }
