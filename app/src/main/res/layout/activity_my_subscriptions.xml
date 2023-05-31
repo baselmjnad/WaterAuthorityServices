@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MySubscriptions">
+
+    <TextView
+        android:id="@+id/tvMySubsWelcome"
+        android:layout_width="match_parent"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textColor="#3F51B5"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginBottom="10dp"
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/tvMySubsConsumerName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/twotone_person_24"
+        android:drawablePadding="10dp"
+        android:text="Full Name"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvMySubsPhone"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/twotone_phone_android_24"
+        android:drawablePadding="10dp"
+        android:text="Phone number"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvMySubsAddress"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/twotone_location_on_24"
+        android:drawablePadding="10dp"
+        android:text="Address"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subscriptions" />
+
+</LinearLayout>

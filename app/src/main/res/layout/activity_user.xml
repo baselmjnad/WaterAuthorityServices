@@ -60,6 +60,7 @@
                     android:id="@+id/button2"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
+                    android:onClick="GotoMySubscriptions"
                     app:icon="@drawable/twotone_info_24"
                     app:iconGravity="textStart"
                     app:iconSize="60dp" />
