@@ -49,7 +49,7 @@ public class MySubscriptions extends AppCompatActivity {
         Gson gson = new Gson();
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(helper.MainUrl + "Consumer/4")
+                .url(helper.MainUrl + "consumer/getbyuser/"+id)
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
