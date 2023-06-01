@@ -73,4 +73,10 @@
         android:layout_height="wrap_content"
         android:text="Subscriptions" />
 
+    <TextView
+        android:id="@+id/tvMysubsError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#B71C1C" />
+
 </LinearLayout>

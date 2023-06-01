@@ -60,6 +60,7 @@
     <EditText
         android:id="@+id/etConsumerPhone"
         android:layout_width="250dp"
+        android:maxLength="10"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:inputType="phone" />
