@@ -1,11 +1,19 @@
 package Classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Classes.User;
 
 public class Consumer {
     public Integer id;
     public String consumerName;
     public String consumerPhone;
+    public String consumerAddress;
+    public User user;
+
+    public List<Subscription> subscriptions;
+
 
     public Integer getId() {
         return id;
@@ -47,7 +55,11 @@ public class Consumer {
         this.user = user;
     }
 
-    public String consumerAddress;
-    public User user;
+    public List<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
 
+    public void setSubscriptions(List<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
 }

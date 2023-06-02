@@ -24,4 +24,11 @@ public class UserActivity extends AppCompatActivity {
         intent.putExtra("userId",tt.getStringExtra("userId"));
         startActivity(intent);
     }
+    public void GotoAttachSubscriptions(View view){
+        Intent tt=getIntent();
+        Intent intent=new Intent(UserActivity.this,AttachSubscriptions.class);
+        intent.putExtra("userName",tt.getStringExtra("userName") );
+        intent.putExtra("userId",tt.getStringExtra("userId"));
+        startActivity(intent);
+    }
 }

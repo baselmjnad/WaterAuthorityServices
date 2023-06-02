@@ -40,6 +40,7 @@
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_marginRight="25dp"
+                    android:onClick="GotoAttachSubscriptions"
                     app:icon="@drawable/twotone_move_down_24"
                     app:iconGravity="textStart"
                     app:iconSize="60dp" />
@@ -198,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Requests istatus" />
+                    android:text="Requests Status" />
             </LinearLayout>
 
         </LinearLayout>
