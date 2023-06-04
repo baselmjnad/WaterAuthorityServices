@@ -40,7 +40,7 @@ public class MySubscriptions extends AppCompatActivity {
         Intent t = getIntent();
         userName = t.getStringExtra("userName");
         userId = t.getStringExtra("userId");
-        tvMySubsWelcome.setText("Welcome " + userName.toUpperCase());
+        tvMySubsWelcome.setText("User: " + userName.toUpperCase());
         ShowConsumer(userId);
 
     }

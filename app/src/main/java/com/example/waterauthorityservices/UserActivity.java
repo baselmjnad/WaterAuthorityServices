@@ -15,7 +15,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
         tvWelcome=findViewById(R.id.tvWelcome);
         Intent t=getIntent();
-        tvWelcome.setText("Welcome "+t.getStringExtra("userName").toUpperCase());
+        tvWelcome.setText("User: "+t.getStringExtra("userName").toUpperCase());
     }
     public void GotoMySubscriptions(View view){
         Intent tt=getIntent();

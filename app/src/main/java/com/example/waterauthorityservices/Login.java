@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
 
             //request start----------------------------------------------------
             Request request = new Request.Builder()
-                    .url(helper.LoginUrl)
+                    .url(helper.MainUrl+"user/login")
                     .post(requestBody)
                     .build();
             //request end----------------------------------------------------
@@ -71,7 +71,7 @@ public class Login extends AppCompatActivity {
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    tvError.setText("failed to connect to system");
+                    tvError.setText("Connection Error!");
 
                 }
 

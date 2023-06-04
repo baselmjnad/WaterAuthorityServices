@@ -33,7 +33,7 @@ public class Register extends AppCompatActivity {
     TextView tvError;
     Consumer consumer = new Consumer();
     Helper helper = new Helper();
-    Boolean userExist=true;
+    Boolean userExist = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class Register extends AppCompatActivity {
             if (TextUtils.equals(etRegisterPassword.getText().toString(), etPasswordConfirm.getText().toString())) {
                 // start check if user exist
                 OkHttpClient client = new OkHttpClient();
-                String uri = helper.CheckUserIfExistUrl + etRegisterUserName.getText().toString().trim();
+                String uri = helper.MainUrl + "user/exists/" + etRegisterUserName.getText().toString().trim();
                 Request request = new Request.Builder()
                         .url(uri)
                         .build();
@@ -80,10 +80,10 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void run() {
 
-                                    if (TextUtils.equals(respo,"true")){
+                                    if (TextUtils.equals(respo, "true")) {
                                         tvError.setText("User Exist, please try again.");
                                         userExist = true;
-                                    }else {
+                                    } else {
                                         userExist = false;
                                     }
                                 }
@@ -94,7 +94,7 @@ public class Register extends AppCompatActivity {
 
                 // end check if user exist
 
-                User user1=new User();
+                User user1 = new User();
                 user1.userName = etRegisterUserName.getText().toString().trim();
                 user1.password = etRegisterPassword.getText().toString().trim();
                 user1.userType = "consumer";
@@ -102,17 +102,17 @@ public class Register extends AppCompatActivity {
                 consumer.consumerName = etConsumerName.getText().toString().trim();
                 consumer.consumerAddress = etConsumerAddress.getText().toString().trim();
                 consumer.consumerPhone = etConsumerPhone.getText().toString().trim();
-                consumer.user=user1;
+                consumer.user = user1;
 
                 // start add consumer---------------------------------------------------------------
-                if(!userExist){
+                if (!userExist) {
 
                     RegisterMethod(consumer);
 
                 }
 
                 // end add consumer-----------------------------------------------------------------
-            }else{
+            } else {
                 tvError.setText("Check password and confirm it");
             }
 
@@ -123,19 +123,19 @@ public class Register extends AppCompatActivity {
 
     }
 
-    public void RegisterMethod(Consumer consumer){
+    public void RegisterMethod(Consumer consumer) {
 
         OkHttpClient client = new OkHttpClient();
         Gson gson = new Gson();
-        String json=gson.toJson(consumer);
+        String json = gson.toJson(consumer);
 
         // request body start--------------------------------------------
-        RequestBody requestBody=RequestBody.create(MediaType.parse("application/json"),json);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), json);
         // request body end----------------------------------------------
 
         //request start----------------------------------------------------
         Request request = new Request.Builder()
-                .url(helper.addConsumerUrl)
+                .url(helper.MainUrl + "consumer")
                 .post(requestBody)
                 .build();
         //request end----------------------------------------------------
@@ -165,7 +165,7 @@ public class Register extends AppCompatActivity {
                             etRegisterPassword.getText().clear();
                             etPasswordConfirm.getText().clear();
                             tvError.setText("");
-                            Toast.makeText(getApplicationContext(),"Consumer added successfully",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Consumer added successfully", Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
