@@ -26,38 +26,47 @@
         android:layout_marginBottom="10dp"
         android:background="?android:attr/listDivider" />
 
-    <TextView
-        android:id="@+id/tvMyAttachConsumerName"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="10dp"
-        android:drawableLeft="@drawable/twotone_person_24"
-        android:drawablePadding="10dp"
-        android:text="Full Name"
-        android:textSize="18sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="#BCCEEC"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tvAttachPhone"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="10dp"
-        android:drawableLeft="@drawable/twotone_phone_android_24"
-        android:drawablePadding="10dp"
-        android:text="Phone number"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tvMyAttachConsumerName"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawableLeft="@drawable/twotone_person_24"
+            android:drawablePadding="10dp"
+            android:text="Full Name"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tvAttachAddress"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="10dp"
-        android:drawableLeft="@drawable/twotone_location_on_24"
-        android:drawablePadding="10dp"
-        android:text="Address"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tvAttachPhone"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawableLeft="@drawable/twotone_phone_android_24"
+            android:drawablePadding="10dp"
+            android:text="Phone number"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvAttachAddress"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawableLeft="@drawable/twotone_location_on_24"
+            android:drawablePadding="10dp"
+            android:text="Address"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <View
         android:id="@+id/dividerr"
@@ -70,8 +79,8 @@
     <TextView
         android:id="@+id/textView13"
         android:layout_width="match_parent"
-        android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:text="Search" />
 
     <LinearLayout
@@ -106,18 +115,18 @@
         android:id="@+id/tvAttachError"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
         android:gravity="center"
-        android:textColor="#B71C1C" />
+        android:textColor="#B71C1C"
+        android:textSize="16dp" />
 
     <LinearLayout
         android:id="@+id/llSubs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
         android:layout_margin="10dp"
         android:background="#BCCEEC"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
         android:visibility="visible">
 
         <TextView
@@ -174,7 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:onClick="SendRequest"
-            android:text="Send Request" />
+            android:text="Send Attach Request" />
 
     </LinearLayout>
 

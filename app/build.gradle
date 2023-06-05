@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+
     namespace 'com.example.waterauthorityservices'
     compileSdk 33
 
@@ -14,6 +15,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures{
+        viewBinding true
     }
 
     buildTypes {

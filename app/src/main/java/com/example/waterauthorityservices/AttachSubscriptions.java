@@ -144,7 +144,7 @@ public class AttachSubscriptions extends AppCompatActivity {
                                         llSubs.setVisibility(View.VISIBLE);
                                         subscription1 = subscription;
                                     } else {
-                                        tvAttachError.setText("This subscription is attached to another Consumer");
+                                        tvAttachError.setText("This subscription is attached to a Consumer!!!");
                                     }
                                 } else {
                                     tvAttachError.setText("this subscription is not active");

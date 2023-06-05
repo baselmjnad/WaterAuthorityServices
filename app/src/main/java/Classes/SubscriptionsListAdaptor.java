@@ -22,18 +22,18 @@ public class SubscriptionsListAdaptor extends ArrayAdapter<Subscription> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
 
         Subscription subscription=getItem(position);
-        if(convertView==null){
-            convertView= LayoutInflater.from(getContext()).inflate(R.layout.subscription_item,parent,false);
+        if(view==null){
+            view= LayoutInflater.from(getContext()).inflate(R.layout.subscription_item,parent,false);
         }
 
-        TextView tvItemStatus=convertView.findViewById(R.id.tvItemStatus);
-        TextView tvItemBarcode=convertView.findViewById(R.id.tvItemBarcode);
-        TextView tvItemSubscritionNo=convertView.findViewById(R.id.tvItemSubscritionNo);
-        TextView tvItemType=convertView.findViewById(R.id.tvItemType);
-        TextView tvItemAdress=convertView.findViewById(R.id.tvItemAdress);
+        TextView tvItemStatus=view.findViewById(R.id.tvItemStatus);
+        TextView tvItemBarcode=view.findViewById(R.id.tvItemBarcode);
+        TextView tvItemSubscritionNo=view.findViewById(R.id.tvItemSubscritionNo);
+        TextView tvItemType=view.findViewById(R.id.tvItemType);
+        TextView tvItemAdress=view.findViewById(R.id.tvItemAdress);
 
         tvItemBarcode.setText(subscription.consumerBarCode);
         tvItemSubscritionNo.setText(subscription.consumerSubscriptionNo);
@@ -41,10 +41,12 @@ public class SubscriptionsListAdaptor extends ArrayAdapter<Subscription> {
         tvItemAdress.setText(subscription.subscriptionAddress);
         if(subscription.subscriptionStatus.equals("active")){
             tvItemStatus.setBackgroundResource(R.color.Green);
+            tvItemStatus.setText("Active");
         }else {
             tvItemStatus.setBackgroundResource(R.color.Red);
+            tvItemStatus.setText("Not Active");
         }
 
-        return super.getView(position, convertView, parent);
+        return view;
     }
 }
