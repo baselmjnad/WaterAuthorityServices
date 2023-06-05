@@ -118,7 +118,7 @@ public class Login extends AppCompatActivity {
 //        if (!TextUtils.isEmpty(etUsername.getText().toString()) && !TextUtils.isEmpty(etPassword.getText().toString())) {
 //
 //            OkHttpClient client = new OkHttpClient();
-//            Request request = new Request.Builder()
+//            ServicesRequest request = new ServicesRequest.Builder()
 //                    .url(helper.GetUsersUrl)
 //                    .build();
 //            client.newCall(request).enqueue(new Callback() {

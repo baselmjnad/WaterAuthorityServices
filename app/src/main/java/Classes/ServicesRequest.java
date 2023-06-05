@@ -2,7 +2,7 @@ package Classes;
 
 import java.util.Date;
 
-public class Request {
+public class ServicesRequest {
     public Integer id;
     public String requestType;
     public Date requestDate;

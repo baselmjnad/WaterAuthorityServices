@@ -24,6 +24,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MySubscriptions extends AppCompatActivity {
+
     TextView tvMySubsWelcome, tvMysubsError, tvMySubsConsumerName, tvMySubsPhone, tvMySubsAddress;
     String userName, userId;
     Helper helper = new Helper();
@@ -32,6 +33,7 @@ public class MySubscriptions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_subscriptions);
+
         tvMySubsWelcome = findViewById(R.id.tvMySubsWelcome);
         tvMysubsError = findViewById(R.id.tvMysubsError);
         tvMySubsConsumerName = findViewById(R.id.tvMySubsConsumerName);

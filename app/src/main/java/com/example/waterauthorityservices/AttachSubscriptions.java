@@ -1,8 +1,10 @@
 package com.example.waterauthorityservices;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,16 +14,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import Classes.Consumer;
+import Classes.Department;
 import Classes.Helper;
+import Classes.ServicesRequest;
 import Classes.Subscription;
+import Classes.User;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class AttachSubscriptions extends AppCompatActivity {
@@ -33,13 +47,13 @@ public class AttachSubscriptions extends AppCompatActivity {
     TextView tvSubsNumber, tvSubsType, tvSubsAddress;
     Helper helper = new Helper();
     Consumer consumer1 = new Consumer();
+    Subscription subscription1 = new Subscription();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attach_subscriptions);
-
         tvAttachWelcome = findViewById(R.id.tvAttachWelcome);
         tvAttachError = findViewById(R.id.tvAttachError);
         tvMyAttachConsumerName = findViewById(R.id.tvMyAttachConsumerName);
@@ -77,9 +91,11 @@ public class AttachSubscriptions extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String res = response.body().string();
                     Consumer consumer = gson.fromJson(res, Consumer.class);
+
                     AttachSubscriptions.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            consumer1 = consumer;
                             tvMyAttachConsumerName.setText(consumer.consumerName);
                             tvAttachPhone.setText(consumer.consumerPhone);
                             tvAttachAddress.setText(consumer.consumerAddress);
@@ -121,15 +137,16 @@ public class AttachSubscriptions extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (subscription.subscriptionStatus.equals("active")) {
-                                    if(subscription.consumer==null){
+                                    if (subscription.consumer == null) {
                                         tvSubsNumber.setText(subscription.consumerSubscriptionNo);
                                         tvSubsType.setText(subscription.subscriptionUsingType);
                                         tvSubsAddress.setText(subscription.subscriptionAddress);
                                         llSubs.setVisibility(View.VISIBLE);
-                                    }else {
+                                        subscription1 = subscription;
+                                    } else {
                                         tvAttachError.setText("This subscription is attached to another Consumer");
                                     }
-                                }else {
+                                } else {
                                     tvAttachError.setText("this subscription is not active");
                                 }
                             }
@@ -144,7 +161,87 @@ public class AttachSubscriptions extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Barconde must be 6 Digits, example:004255", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void Send() {
+        ServicesRequest req = new ServicesRequest();
+        Department department = new Department();
+        department.departmentName = "ConsumersDep";
+        department.id = 2;
+        req.consumer = consumer1;
+        req.subscription = subscription1;
+        req.requestDate = Calendar.getInstance().getTime();
+        req.requestType = "attach";
+        req.requestStatus = "onprogress";
+        req.currentDepartment = department;
+
+        OkHttpClient client = new OkHttpClient();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+
+        String json = gson.toJson(req);
+
+        // request body start--------------------------------------------
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), json);
+        // request body end----------------------------------------------
+
+        //request start----------------------------------------------------
+        Request request = new Request.Builder()
+                .url(helper.MainUrl + "Request")
+                .post(requestBody)
+                .build();
+        //request end----------------------------------------------------
+
+
+        //response start----------------------------------------------------
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                tvAttachError.setText("Connection Error!");
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+
+                if (response.isSuccessful()) {
+
+                    String respString = response.body().string();
+                    ServicesRequest req1 = gson.fromJson(respString, ServicesRequest.class);
+                    AttachSubscriptions.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "YOUR REQUEST IS SENT", Toast.LENGTH_LONG).show();
+                            tvAttachError.setText("YOUR REQUEST No : " + req1.id.toString());
+                            llSubs.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                } else {
+                    tvAttachError.setText("Sending request Error!");
+                }
+            }
+        });
+
 
     }
 
+    public void SendRequest(View view) {
+        AlertDialog.Builder builder=new AlertDialog.Builder(AttachSubscriptions.this);
+        builder.setTitle("Confirmation!!");
+        builder.setIcon(R.drawable.twotone_fmd_bad_24);
+        builder.setMessage("Are you sure this subscription belongs to you?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Send();
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();           }
+        });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+    }
 }
