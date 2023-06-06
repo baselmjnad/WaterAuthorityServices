@@ -113,48 +113,5 @@ public class Login extends AppCompatActivity {
 
     }
 
-//    public void LoginUser(View view) {
-//        tvError.setText("");
-//        if (!TextUtils.isEmpty(etUsername.getText().toString()) && !TextUtils.isEmpty(etPassword.getText().toString())) {
-//
-//            OkHttpClient client = new OkHttpClient();
-//            ServicesRequest request = new ServicesRequest.Builder()
-//                    .url(helper.GetUsersUrl)
-//                    .build();
-//            client.newCall(request).enqueue(new Callback() {
-//                @Override
-//                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//                    tvError.setText("failed to connect to api");
-//                }
-//
-//                @Override
-//                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-//
-//                    if (response.isSuccessful()) {
-//                        try {
-//                            String res = response.body().string();
-//                            JSONArray jsonArray = new JSONArray(res);
-//                            Login.this.runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    tvError.setText(String.valueOf(jsonArray.length()));
-//                                }
-//                            });
-//
-//
-//                        } catch (JSONException e) {
-//                            tvError.setText("response to Jsonarray issue");
-//                        }
-//
-//                    } else {
-//                        tvError.setText("failed response");
-//                    }
-//                }
-//            });
-//        }else {
-//            tvError.setText("User Name or Password is missing!");
-//        }
-//    }
-
 
 }

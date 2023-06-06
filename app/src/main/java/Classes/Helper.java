@@ -79,3 +79,7 @@ public class Helper {
 
 //-------------Toast------------------------
 //    Toast.makeText(getApplicationContext(), "YOUR REQUEST IS SENT", Toast.LENGTH_LONG).show();
+
+
+
+//------------------------GET with jsonArray Response------------------------------------

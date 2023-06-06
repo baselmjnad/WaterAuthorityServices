@@ -5,44 +5,46 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waterauthorityservices.databinding.ActivityMySubscriptionsBinding;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import Classes.Consumer;
 import Classes.Helper;
 import Classes.Subscription;
 import Classes.SubscriptionsListAdaptor;
-import Classes.User;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MySubscriptions extends AppCompatActivity {
     ActivityMySubscriptionsBinding binding;
     TextView tvMySubsWelcome, tvMysubsError, tvMySubsConsumerName, tvMySubsPhone, tvMySubsAddress;
-    String userName, userId;
+    String userName, userId,conId;
+    ArrayList<Subscription> list;
     Helper helper = new Helper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityMySubscriptionsBinding.inflate(getLayoutInflater());
+        binding = ActivityMySubscriptionsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        list = new ArrayList<>();
         tvMySubsWelcome = findViewById(R.id.tvMySubsWelcome);
         tvMysubsError = findViewById(R.id.tvMysubsError);
         tvMySubsConsumerName = findViewById(R.id.tvMySubsConsumerName);
@@ -52,44 +54,11 @@ public class MySubscriptions extends AppCompatActivity {
         userName = t.getStringExtra("userName");
         userId = t.getStringExtra("userId");
         tvMySubsWelcome.setText("User: " + userName.toUpperCase());
-        ShowConsumer(userId);
-
-        //----------temp list-------------------
-        Subscription subscription1=new Subscription();
-        subscription1.id=1;
-        subscription1.consumerSubscriptionNo="111111";
-        subscription1.subscriptionAddress="Dubai";
-        subscription1.consumerBarCode="111000";
-        subscription1.subscriptionUsingType="Home";
-        subscription1.subscriptionStatus="active";
-        Subscription subscription2=new Subscription();
-        subscription2.id=2;
-        subscription2.consumerSubscriptionNo="222222";
-        subscription2.subscriptionUsingType="Industrial";
-        subscription2.subscriptionAddress="Dubai";
-        subscription2.consumerBarCode="222000";
-        subscription2.subscriptionStatus="inactive";
-        ArrayList<Subscription> list=new ArrayList<>();
-        list.add(subscription1);
-        list.add(subscription2);
-
-        //----------end temp list---------------
-        SubscriptionsListAdaptor listAdaptor=new SubscriptionsListAdaptor(MySubscriptions.this,list);
-        binding.lvSubscriptions.setAdapter(listAdaptor);
-        binding.lvSubscriptions.setClickable(true);
-        binding.lvSubscriptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), list.get(position).consumerBarCode, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void ShowConsumer(String id) {
+        //------------------------ShowConsumer(userId);---------------------------------------------
         Gson gson = new Gson();
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(helper.MainUrl + "consumer/getbyuser/"+id)
+                .url(helper.MainUrl + "consumer/getbyuser/" + userId)
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -109,6 +78,8 @@ public class MySubscriptions extends AppCompatActivity {
                             tvMySubsConsumerName.setText(consumer.consumerName);
                             tvMySubsPhone.setText(consumer.consumerPhone);
                             tvMySubsAddress.setText(consumer.consumerAddress);
+                            conId=consumer.id.toString();
+
                         }
                     });
 
@@ -119,6 +90,67 @@ public class MySubscriptions extends AppCompatActivity {
             }
         });
 
+        //-------------------------END SHOW consumer------------------------------------------------
+
+        //----------GET Json array------------------------------------------------------------------
+
+        //------------END Get Subscriptions---------------------------------------------------------
+    }
+
+
+    public void GetSubs(View view){
+        tvMysubsError.setText("");
+        OkHttpClient client1 = new OkHttpClient();
+        Request request1 = new Request.Builder()
+                .url(helper.MainUrl + "subscription/getconsumersubscriptions/" + conId)
+                .build();
+        client1.newCall(request1).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                tvMysubsError.setText("failed to connect to api");
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response1) throws IOException {
+
+                if (response1.isSuccessful()) {
+                    String res = response1.body().string();
+//                        JSONArray jsonArray = new JSONArray(res);
+                    Gson gson = new Gson();
+
+                    Type type1 = new TypeToken<ArrayList<Subscription>>(){}.getType();
+
+                    ArrayList<Subscription> userArray = gson.fromJson(res, type1);
+
+                    MySubscriptions.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            list=userArray;
+                            if(list.isEmpty()){
+                                tvMysubsError.setText("No Subscritptions for you!!");
+                            }
+
+                        }
+                    });
+
+
+                } else {
+                    tvMysubsError.setText("failed response");
+                }
+            }
+        });
+
+        SubscriptionsListAdaptor listAdaptor = new SubscriptionsListAdaptor(MySubscriptions.this, list);
+        binding.lvSubscriptions.setAdapter(listAdaptor);
+        binding.lvSubscriptions.setClickable(true);
+        binding.lvSubscriptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), list.get(position).subscriptionStatus, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
+
 }

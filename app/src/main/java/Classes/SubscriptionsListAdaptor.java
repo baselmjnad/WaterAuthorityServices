@@ -29,7 +29,7 @@ public class SubscriptionsListAdaptor extends ArrayAdapter<Subscription> {
             view= LayoutInflater.from(getContext()).inflate(R.layout.subscription_item,parent,false);
         }
 
-        TextView tvItemStatus=view.findViewById(R.id.tvItemStatus);
+        ImageView ivItemImage=view.findViewById(R.id.ivItemImage);
         TextView tvItemBarcode=view.findViewById(R.id.tvItemBarcode);
         TextView tvItemSubscritionNo=view.findViewById(R.id.tvItemSubscritionNo);
         TextView tvItemType=view.findViewById(R.id.tvItemType);
@@ -40,11 +40,9 @@ public class SubscriptionsListAdaptor extends ArrayAdapter<Subscription> {
         tvItemType.setText(subscription.subscriptionUsingType);
         tvItemAdress.setText(subscription.subscriptionAddress);
         if(subscription.subscriptionStatus.equals("active")){
-            tvItemStatus.setBackgroundResource(R.color.Green);
-            tvItemStatus.setText("Active");
+            ivItemImage.setImageResource(R.drawable.twotone_check_circle_24);
         }else {
-            tvItemStatus.setBackgroundResource(R.color.Red);
-            tvItemStatus.setText("Not Active");
+            ivItemImage.setImageResource(R.drawable.twotone_cancel_24);
         }
 
         return view;
