@@ -22,6 +22,16 @@ public class UserActivity extends AppCompatActivity {
         Intent intent=new Intent(UserActivity.this,MySubscriptions.class);
         intent.putExtra("userName",tt.getStringExtra("userName") );
         intent.putExtra("userId",tt.getStringExtra("userId"));
+        intent.putExtra("type","subscriptions");
+
+        startActivity(intent);
+    }
+    public void GotoMyBills(View view){
+        Intent ttt=getIntent();
+        Intent intent=new Intent(UserActivity.this,MySubscriptions.class);
+        intent.putExtra("userName",ttt.getStringExtra("userName") );
+        intent.putExtra("userId",ttt.getStringExtra("userId"));
+        intent.putExtra("type","bills");
         startActivity(intent);
     }
     public void GotoAttachSubscriptions(View view){

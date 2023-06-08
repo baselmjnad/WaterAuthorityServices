@@ -170,6 +170,7 @@
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_marginRight="25dp"
+                    android:onClick="GotoMyBills"
                     app:icon="@drawable/twotone_monetization_on_24"
                     app:iconGravity="textStart"
                     app:iconSize="60dp" />
@@ -178,7 +179,7 @@
                     android:id="@+id/textView200"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bills inquiry" />
+                    android:text="My Invoices" />
             </LinearLayout>
 
             <LinearLayout

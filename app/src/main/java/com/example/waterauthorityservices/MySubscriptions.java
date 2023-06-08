@@ -34,7 +34,7 @@ import okhttp3.Response;
 public class MySubscriptions extends AppCompatActivity {
     ActivityMySubscriptionsBinding binding;
     TextView tvMySubsWelcome, tvMysubsError, tvMySubsConsumerName, tvMySubsPhone, tvMySubsAddress;
-    String userName, userId,conId;
+    String userName, userId, conId;
     ArrayList<Subscription> list;
     Helper helper = new Helper();
 
@@ -78,7 +78,7 @@ public class MySubscriptions extends AppCompatActivity {
                             tvMySubsConsumerName.setText(consumer.consumerName);
                             tvMySubsPhone.setText(consumer.consumerPhone);
                             tvMySubsAddress.setText(consumer.consumerAddress);
-                            conId=consumer.id.toString();
+                            conId = consumer.id.toString();
 
                         }
                     });
@@ -98,7 +98,7 @@ public class MySubscriptions extends AppCompatActivity {
     }
 
 
-    public void GetSubs(View view){
+    public void GetSubs(View view) {
         tvMysubsError.setText("");
         OkHttpClient client1 = new OkHttpClient();
         Request request1 = new Request.Builder()
@@ -118,15 +118,16 @@ public class MySubscriptions extends AppCompatActivity {
 //                        JSONArray jsonArray = new JSONArray(res);
                     Gson gson = new Gson();
 
-                    Type type1 = new TypeToken<ArrayList<Subscription>>(){}.getType();
+                    Type type1 = new TypeToken<ArrayList<Subscription>>() {
+                    }.getType();
 
                     ArrayList<Subscription> userArray = gson.fromJson(res, type1);
 
                     MySubscriptions.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            list=userArray;
-                            if(list.isEmpty()){
+                                list = userArray;
+                            if (list.isEmpty()) {
                                 tvMysubsError.setText("No Subscritptions for you!!");
                             }
 
@@ -146,7 +147,17 @@ public class MySubscriptions extends AppCompatActivity {
         binding.lvSubscriptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), list.get(position).subscriptionStatus, Toast.LENGTH_SHORT).show();
+                Intent t1 = getIntent();
+                if (t1.getStringExtra("type").equals("subscriptions")) {
+                    Toast.makeText(getApplicationContext(), list.get(position).subscriptionStatus, Toast.LENGTH_SHORT).show();
+                }
+                if (t1.getStringExtra("type").equals("bills")) {
+                    Intent intent = new Intent(MySubscriptions.this, InvoicesActivity.class);
+                    intent.putExtra("barcode",list.get(position).consumerBarCode);
+                    startActivity(intent);
+
+                }
+
             }
         });
 
