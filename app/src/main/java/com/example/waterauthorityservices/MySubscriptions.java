@@ -14,9 +14,6 @@ import com.example.waterauthorityservices.databinding.ActivityMySubscriptionsBin
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -79,6 +76,7 @@ public class MySubscriptions extends AppCompatActivity {
                             tvMySubsPhone.setText(consumer.consumerPhone);
                             tvMySubsAddress.setText(consumer.consumerAddress);
                             conId = consumer.id.toString();
+                            GetSubs(conId);
 
                         }
                     });
@@ -98,11 +96,11 @@ public class MySubscriptions extends AppCompatActivity {
     }
 
 
-    public void GetSubs(View view) {
+    public void GetSubs(String id1) {
         tvMysubsError.setText("");
         OkHttpClient client1 = new OkHttpClient();
         Request request1 = new Request.Builder()
-                .url(helper.MainUrl + "subscription/getconsumersubscriptions/" + conId)
+                .url(helper.MainUrl + "subscription/getconsumersubscriptions/" + id1)
                 .build();
         client1.newCall(request1).enqueue(new Callback() {
             @Override
@@ -126,9 +124,11 @@ public class MySubscriptions extends AppCompatActivity {
                     MySubscriptions.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                                list = userArray;
-                            if (list.isEmpty()) {
+                            list = userArray;
+                            if (list.isEmpty() || list.size() == 0) {
                                 tvMysubsError.setText("No Subscritptions for you!!");
+                            } else {
+                                Doit(list);
                             }
 
                         }
@@ -141,7 +141,11 @@ public class MySubscriptions extends AppCompatActivity {
             }
         });
 
-        SubscriptionsListAdaptor listAdaptor = new SubscriptionsListAdaptor(MySubscriptions.this, list);
+
+    }
+
+    public void Doit(ArrayList<Subscription> listy) {
+        SubscriptionsListAdaptor listAdaptor = new SubscriptionsListAdaptor(MySubscriptions.this, listy);
         binding.lvSubscriptions.setAdapter(listAdaptor);
         binding.lvSubscriptions.setClickable(true);
         binding.lvSubscriptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -149,18 +153,17 @@ public class MySubscriptions extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent t1 = getIntent();
                 if (t1.getStringExtra("type").equals("subscriptions")) {
-                    Toast.makeText(getApplicationContext(), list.get(position).subscriptionStatus, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), listy.get(position).subscriptionStatus, Toast.LENGTH_SHORT).show();
                 }
                 if (t1.getStringExtra("type").equals("bills")) {
-                    Intent intent = new Intent(MySubscriptions.this, InvoicesActivity.class);
-                    intent.putExtra("barcode",list.get(position).consumerBarCode);
+                    Intent intent = new Intent(MySubscriptions.this, MyInvoices.class);
+                    intent.putExtra("barcode", listy.get(position).consumerBarCode);
                     startActivity(intent);
 
                 }
 
             }
         });
-
 
     }
 

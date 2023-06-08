@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".InvoicesActivity">
+    tools:context=".MyInvoices">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -36,24 +36,18 @@
                 android:layout_margin="10dp"
                 android:drawableLeft="@drawable/baseline_currency_exchange_24"
                 android:drawablePadding="10dp"
-                android:text="Total"
-                android:textSize="18sp" />
+                android:text=""
+                android:textColor="@color/Red"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvIncoiceError"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text=""
                 android:textColor="@color/Red"
-                android:textSize="14dp"
-                android:text="" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:onClick="GetIncoices"
-                android:text="Show invoices" />
+                android:textSize="14dp" />
 
         </LinearLayout>
 

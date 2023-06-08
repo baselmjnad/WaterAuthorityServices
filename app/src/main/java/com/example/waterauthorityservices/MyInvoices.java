@@ -10,8 +10,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.waterauthorityservices.databinding.ActivityInvoicesBinding;
-import com.example.waterauthorityservices.databinding.ActivityMySubscriptionsBinding;
+import com.example.waterauthorityservices.databinding.ActivityMyinvoicesBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -22,37 +21,37 @@ import java.util.ArrayList;
 import Classes.Helper;
 import Classes.Invoice;
 import Classes.InvoicesListAdaptor;
-import Classes.Subscription;
-import Classes.SubscriptionsListAdaptor;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class InvoicesActivity extends AppCompatActivity {
-    ActivityInvoicesBinding binding;
+public class MyInvoices extends AppCompatActivity {
+    ActivityMyinvoicesBinding binding;
 
     TextView tvInvoicesBarcode,tvInvoicesTotal,tvError;
-    String barCode="";
-    ArrayList<Invoice> list;
+    String barCode;
+    ArrayList<Invoice> list1;
     Helper helper = new Helper();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityInvoicesBinding.inflate(getLayoutInflater());
+        binding = ActivityMyinvoicesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        list = new ArrayList<>();
+        list1 = new ArrayList<>();
         tvInvoicesBarcode=findViewById(R.id.tvInvoicesBarcode);
         tvError=findViewById(R.id.tvIncoiceError);
         tvInvoicesTotal=findViewById(R.id.tvInvoicesTotal);
         Intent t = getIntent();
         barCode = t.getStringExtra("barcode");
+        tvInvoicesBarcode.setText(barCode);
+        GetInvcoices();
     }
-    public void GetIncoices(View view){
+    public void GetInvcoices(){
         tvError.setText("");
         OkHttpClient client1 = new OkHttpClient();
         Request request1 = new Request.Builder()
@@ -72,14 +71,17 @@ public class InvoicesActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     Type type1 = new TypeToken<ArrayList<Invoice>>() {
                     }.getType();
-                    ArrayList<Invoice> userArray = gson.fromJson(res, type1);
-
-                    InvoicesActivity.this.runOnUiThread(new Runnable() {
+                    ArrayList<Invoice> userArray1 = gson.fromJson(res, type1);
+                    MyInvoices.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            list = userArray;
-                            if (list.size()==0 || list.isEmpty()) {
+                            list1 = userArray1;
+                            if (list1.size()== 0 || list1.isEmpty()) {
                                 tvError.setText("No Invoices for this subscription!!");
+                            }else {
+                                list1 = userArray1;
+                                Dodo(list1);
+
                             }
                         }
                     });
@@ -89,15 +91,25 @@ public class InvoicesActivity extends AppCompatActivity {
             }
         });
 
-        InvoicesListAdaptor listAdaptor = new InvoicesListAdaptor(InvoicesActivity.this, list);
+        }
+        public void Dodo(ArrayList<Invoice> list2){
+            Integer sum=0;
+            for(Invoice invoice:list2){
+                if(!invoice.invoiceStatus) {
+                    sum += invoice.invoiceValue;
+                }
+            }
+            tvInvoicesTotal.setText("not paid amount "+sum.toString()+" S.P");
+            InvoicesListAdaptor listAdaptor1 = new InvoicesListAdaptor(MyInvoices.this, list2);
 
-        binding.lvInvoices.setAdapter(listAdaptor);
-        binding.lvInvoices.setClickable(true);
-        binding.lvInvoices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(getApplicationContext(), list.get(position).invoiceValue, Toast.LENGTH_SHORT).show();
+            binding.lvInvoices.setAdapter(listAdaptor1);
+            binding.lvInvoices.setClickable(true);
+            binding.lvInvoices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(getApplicationContext(), list2.get(position).invoiceValue.toString()+" S.P", Toast.LENGTH_SHORT).show();
                 }
             });
+
         }
     }
