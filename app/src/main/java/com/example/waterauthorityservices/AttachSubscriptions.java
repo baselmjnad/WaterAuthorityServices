@@ -40,7 +40,7 @@ import okhttp3.Response;
 
 public class AttachSubscriptions extends AppCompatActivity {
     String userName, userId;
-    EditText etSearchBardode;
+    EditText etSearchBarcode;
     LinearLayout llSubs;
     TextView tvAttachWelcome, tvAttachError;
     TextView tvMyAttachConsumerName, tvAttachPhone, tvAttachAddress;
@@ -54,12 +54,13 @@ public class AttachSubscriptions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attach_subscriptions);
+
         tvAttachWelcome = findViewById(R.id.tvAttachWelcome);
         tvAttachError = findViewById(R.id.tvAttachError);
         tvMyAttachConsumerName = findViewById(R.id.tvMyAttachConsumerName);
         tvAttachPhone = findViewById(R.id.tvAttachPhone);
         tvAttachAddress = findViewById(R.id.tvAttachAddress);
-        etSearchBardode = findViewById(R.id.etSearchBardode);
+        etSearchBarcode = findViewById(R.id.etSearchBardode);
         llSubs = findViewById(R.id.llSubs);
         tvSubsNumber = findViewById(R.id.tvSubsNumber);
         tvSubsType = findViewById(R.id.tvSubsType);
@@ -115,11 +116,11 @@ public class AttachSubscriptions extends AppCompatActivity {
     public void SearchByBarcode(View view) {
         tvAttachError.setText("");
         llSubs.setVisibility(View.INVISIBLE);
-        if (etSearchBardode.getText().toString().length() == 6) {
+        if (etSearchBarcode.getText().toString().length() == 6) {
             Gson gson = new Gson();
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(helper.MainUrl + "subscription/getbybarcode/" + etSearchBardode.getText().toString().trim())
+                    .url(helper.MainUrl + "subscription/getbybarcode/" + etSearchBarcode.getText().toString().trim())
                     .build();
             client.newCall(request).enqueue(new Callback() {
                 @Override

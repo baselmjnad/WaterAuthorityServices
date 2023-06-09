@@ -69,7 +69,6 @@ public class Register extends AppCompatActivity {
                     public void onFailure(@NonNull Call call, @NonNull IOException e) {
                         tvError.setText("Connection Error");
                     }
-
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
 
@@ -84,8 +83,10 @@ public class Register extends AppCompatActivity {
                                         tvError.setText("User Exist, please try again.");
                                         userExist = true;
                                     } else {
+
                                         userExist = false;
                                     }
+                                    DoRig(userExist);
                                 }
                             });
                         }
@@ -93,36 +94,28 @@ public class Register extends AppCompatActivity {
                 });
 
                 // end check if user exist
-
-                User user1 = new User();
-                user1.userName = etRegisterUserName.getText().toString().trim();
-                user1.password = etRegisterPassword.getText().toString().trim();
-                user1.userType = "consumer";
-                user1.accountActive = false;
-                consumer.consumerName = etConsumerName.getText().toString().trim();
-                consumer.consumerAddress = etConsumerAddress.getText().toString().trim();
-                consumer.consumerPhone = etConsumerPhone.getText().toString().trim();
-                consumer.user = user1;
-
-                // start add consumer---------------------------------------------------------------
-                if (!userExist) {
-
-                    RegisterMethod(consumer);
-
-                }
-
-                // end add consumer-----------------------------------------------------------------
             } else {
                 tvError.setText("Check password and confirm it");
             }
-
-
         } else {
             tvError.setText("Please enter all data");
         }
-
     }
+    public void DoRig(Boolean exist){
 
+        User user1 = new User();
+        user1.userName = etRegisterUserName.getText().toString().trim();
+        user1.password = etRegisterPassword.getText().toString().trim();
+        user1.userType = "consumer";
+        user1.accountActive = false;
+        consumer.consumerName = etConsumerName.getText().toString().trim();
+        consumer.consumerAddress = etConsumerAddress.getText().toString().trim();
+        consumer.consumerPhone = etConsumerPhone.getText().toString().trim();
+        consumer.user = user1;
+        if (!exist) {
+            RegisterMethod(consumer);
+        }
+    }
     public void RegisterMethod(Consumer consumer) {
 
         OkHttpClient client = new OkHttpClient();

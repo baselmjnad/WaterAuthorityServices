@@ -10,6 +10,15 @@ public class ServicesRequest {
     public Subscription subscription;
     public String requestStatus;
     public Department currentDepartment;
+    public RequestDetails details;
+
+    public RequestDetails getDetails() {
+        return details;
+    }
+
+    public void setDetails(RequestDetails details) {
+        this.details = details;
+    }
 
     public Integer getId() {
         return id;

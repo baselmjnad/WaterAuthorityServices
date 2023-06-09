@@ -41,4 +41,13 @@ public class UserActivity extends AppCompatActivity {
         intent.putExtra("userId",tt.getStringExtra("userId"));
         startActivity(intent);
     }
+    public void GotoClearanceRequest(View view){
+        Intent ttt=getIntent();
+        Intent intent=new Intent(UserActivity.this,MySubscriptions.class);
+        intent.putExtra("userName",ttt.getStringExtra("userName") );
+        intent.putExtra("userId",ttt.getStringExtra("userId"));
+        intent.putExtra("type","clearance");
+        startActivity(intent);
+
+    }
 }

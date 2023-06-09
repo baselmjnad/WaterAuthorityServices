@@ -1,8 +1,10 @@
 package com.example.waterauthorityservices;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,20 +14,26 @@ import android.widget.Toast;
 
 import com.example.waterauthorityservices.databinding.ActivityMySubscriptionsBinding;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import Classes.Consumer;
+import Classes.Department;
 import Classes.Helper;
+import Classes.ServicesRequest;
 import Classes.Subscription;
 import Classes.SubscriptionsListAdaptor;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MySubscriptions extends AppCompatActivity {
@@ -34,6 +42,7 @@ public class MySubscriptions extends AppCompatActivity {
     String userName, userId, conId;
     ArrayList<Subscription> list;
     Helper helper = new Helper();
+    Consumer consumer1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +78,7 @@ public class MySubscriptions extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String res = response.body().string();
                     Consumer consumer = gson.fromJson(res, Consumer.class);
+                    consumer1=consumer;
                     MySubscriptions.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -159,11 +169,96 @@ public class MySubscriptions extends AppCompatActivity {
                     Intent intent = new Intent(MySubscriptions.this, MyInvoices.class);
                     intent.putExtra("barcode", listy.get(position).consumerBarCode);
                     startActivity(intent);
+                }
+                if (t1.getStringExtra("type").equals("clearance")) {
 
+                    ShowBox(listy.get(position));
                 }
 
             }
         });
+
+    }
+
+    public void ShowBox(Subscription subscription) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MySubscriptions.this);
+        builder.setTitle("Confirmation!!");
+        builder.setIcon(R.drawable.twotone_fmd_bad_24);
+        builder.setMessage("Sure to send Clearance request for this subscription?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SendRequest(subscription);
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+
+    public void SendRequest(Subscription subscription1) {
+        ServicesRequest req = new ServicesRequest();
+        Department department = new Department();
+        department.departmentName = "ConsumersDep";
+        department.id = 2;
+        req.consumer = consumer1;
+        req.subscription = subscription1;
+        req.requestDate = Calendar.getInstance().getTime();
+        req.requestType = "clearance";
+        req.requestStatus = "onprogress";
+        req.currentDepartment = department;
+
+        OkHttpClient client = new OkHttpClient();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+
+        String json = gson.toJson(req);
+
+        // request body start--------------------------------------------
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), json);
+        // request body end----------------------------------------------
+
+        //request start----------------------------------------------------
+        Request request = new Request.Builder()
+                .url(helper.MainUrl + "Request")
+                .post(requestBody)
+                .build();
+        //request end----------------------------------------------------
+
+
+        //response start----------------------------------------------------
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                tvMysubsError.setText("Connection Error!");
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+
+                if (response.isSuccessful()) {
+
+                    String respString = response.body().string();
+                    ServicesRequest req1 = gson.fromJson(respString, ServicesRequest.class);
+                    MySubscriptions.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "YOUR REQUEST IS SENT, "+"YOUR REQUEST No : " + req1.id.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    tvMysubsError.setText("Sending request Error!");
+                }
+            }
+        });
+
 
     }
 

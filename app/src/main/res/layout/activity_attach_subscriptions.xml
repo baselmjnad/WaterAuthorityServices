@@ -7,81 +7,72 @@
     android:orientation="vertical"
     tools:context=".AttachSubscriptions">
 
-    <TextView
-        android:id="@+id/tvAttachWelcome"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="15dp"
-        android:gravity="center"
-        android:textColor="#3F51B5"
-        android:textSize="24sp" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        android:background="?android:attr/listDivider" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:background="#BCCEEC"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_margin="15dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tvMyAttachConsumerName"
-            android:layout_width="250dp"
+            android:id="@+id/tvAttachWelcome"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:drawableLeft="@drawable/twotone_person_24"
-            android:drawablePadding="10dp"
-            android:text="Full Name"
-            android:textSize="18sp" />
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textColor="#3F51B5"
+            android:textSize="24sp" />
+    </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/tvAttachPhone"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:drawableLeft="@drawable/twotone_phone_android_24"
-            android:drawablePadding="10dp"
-            android:text="Phone number"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tvAttachAddress"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:drawableLeft="@drawable/twotone_location_on_24"
-            android:drawablePadding="10dp"
-            android:text="Address"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/dividerr"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_margin="15dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="Search" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvMyAttachConsumerName"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/twotone_person_24"
+                android:drawablePadding="10dp"
+                android:text="Full Name"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvAttachPhone"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/twotone_phone_android_24"
+                android:drawablePadding="10dp"
+                android:text="Phone number"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvAttachAddress"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/twotone_location_on_24"
+                android:drawablePadding="10dp"
+                android:text="Address"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -103,12 +94,13 @@
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_height="40dp"
             android:onClick="SearchByBarcode"
             app:icon="@drawable/outline_search_24"
             app:iconGravity="textStart"
-            app:iconSize="30dp" />
+            app:iconSize="25dp" />
     </LinearLayout>
 
     <TextView
@@ -119,72 +111,80 @@
         android:textColor="#B71C1C"
         android:textSize="16dp" />
 
-    <LinearLayout
-        android:id="@+id/llSubs"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:background="#BCCEEC"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:visibility="visible">
+        android:layout_margin="15dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView16"
+        <LinearLayout
+            android:id="@+id/llSubs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Subscription No."
-            android:textColor="#0D47A1" />
-
-        <TextView
-            android:id="@+id/tvSubsNumber"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Subscription Type"
-            android:textColor="#0D47A1" />
-
-        <TextView
-            android:id="@+id/tvSubsType"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Subscription Address"
-            android:textColor="#0D47A1" />
-
-        <TextView
-            android:id="@+id/tvSubsAddress"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:onClick="SendRequest"
-            android:text="Send Attach Request" />
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:visibility="visible">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Subscription No."
+                android:textColor="#0D47A1" />
+
+            <TextView
+                android:id="@+id/tvSubsNumber"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Subscription Type"
+                android:textColor="#0D47A1" />
+
+            <TextView
+                android:id="@+id/tvSubsType"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Subscription Address"
+                android:textColor="#0D47A1" />
+
+            <TextView
+                android:id="@+id/tvSubsAddress"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="SendRequest"
+                android:text="Send Attach Request" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
