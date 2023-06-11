@@ -2,10 +2,10 @@ package Classes;
 
 public class RequestDetails {
     public Integer id;
-    public Byte document;
+    public Byte[] document;
     public String newSubAddress;
     public String newSubType;
-    Integer requestId;
+    public Integer requestId;
 
     public Integer getId() {
         return id;
@@ -15,11 +15,11 @@ public class RequestDetails {
         this.id = id;
     }
 
-    public Byte getDocument() {
+    public Byte[] getDocument() {
         return document;
     }
 
-    public void setDocument(Byte document) {
+    public void setDocument(Byte[] document) {
         this.document = document;
     }
 

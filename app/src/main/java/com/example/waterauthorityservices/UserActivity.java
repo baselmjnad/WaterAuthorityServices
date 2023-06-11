@@ -50,4 +50,12 @@ public class UserActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void GotoNewMeter(View view){
+        Intent ttt=getIntent();
+        Intent intent=new Intent(UserActivity.this,NewMeter.class);
+        intent.putExtra("userName",ttt.getStringExtra("userName") );
+        intent.putExtra("userId",ttt.getStringExtra("userId"));
+        startActivity(intent);
+
+    }
 }

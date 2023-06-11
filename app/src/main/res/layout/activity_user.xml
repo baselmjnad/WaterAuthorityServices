@@ -127,6 +127,7 @@
                     android:id="@+id/button101"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
+                    android:onClick="GotoNewMeter"
                     app:icon="@drawable/twotone_gas_meter_24"
                     app:iconGravity="textStart"
                     app:iconSize="60dp" />
