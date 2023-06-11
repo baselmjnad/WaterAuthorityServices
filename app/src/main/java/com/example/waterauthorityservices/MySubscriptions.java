@@ -172,7 +172,11 @@ public class MySubscriptions extends AppCompatActivity {
                 }
                 if (t1.getStringExtra("type").equals("clearance")) {
 
-                    ShowBox(listy.get(position));
+                    ShowBoxOfClearance(listy.get(position));
+                }
+                if (t1.getStringExtra("type").equals("repair")) {
+
+                    ShowBoxOfRepair(listy.get(position));
                 }
 
             }
@@ -180,7 +184,7 @@ public class MySubscriptions extends AppCompatActivity {
 
     }
 
-    public void ShowBox(Subscription subscription) {
+    public void ShowBoxOfClearance(Subscription subscription) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MySubscriptions.this);
         builder.setTitle("Confirmation!!");
         builder.setIcon(R.drawable.twotone_fmd_bad_24);
@@ -189,7 +193,7 @@ public class MySubscriptions extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SendRequest(subscription);
+                SendClearanceRequest(subscription);
             }
         });
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -203,7 +207,7 @@ public class MySubscriptions extends AppCompatActivity {
 
     }
 
-    public void SendRequest(Subscription subscription1) {
+    public void SendClearanceRequest(Subscription subscription1) {
         ServicesRequest req = new ServicesRequest();
         Department department = new Department();
         department.departmentName = "ConsumersDep";
@@ -250,7 +254,7 @@ public class MySubscriptions extends AppCompatActivity {
                     MySubscriptions.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "YOUR REQUEST IS SENT, "+"YOUR REQUEST No : " + req1.id.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "YOUR CLEARANCE REQUEST IS SENT, "+"YOUR REQUEST No : " + req1.id.toString(), Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
@@ -261,5 +265,86 @@ public class MySubscriptions extends AppCompatActivity {
 
 
     }
+    public void ShowBoxOfRepair(Subscription subscription) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MySubscriptions.this);
+        builder.setTitle("Confirmation!!");
+        builder.setIcon(R.drawable.twotone_fmd_bad_24);
+        builder.setMessage("This will send Repair request for this subscription Meter, continue?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SendRepairRequest(subscription);
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+    public void SendRepairRequest(Subscription subscription1) {
+        ServicesRequest req = new ServicesRequest();
+        Department department = new Department();
+        department.departmentName = "ConsumersDep";
+        department.id = 2;
+        req.consumer = consumer1;
+        req.subscription = subscription1;
+        req.requestDate = Calendar.getInstance().getTime();
+        req.requestType = "repair";
+        req.requestStatus = "onprogress";
+        req.currentDepartment = department;
+
+        OkHttpClient client = new OkHttpClient();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+
+        String json = gson.toJson(req);
+
+        // request body start--------------------------------------------
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), json);
+        // request body end----------------------------------------------
+
+        //request start----------------------------------------------------
+        Request request = new Request.Builder()
+                .url(helper.MainUrl + "Request")
+                .post(requestBody)
+                .build();
+        //request end----------------------------------------------------
+
+
+        //response start----------------------------------------------------
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                tvMysubsError.setText("Connection Error!");
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+
+                if (response.isSuccessful()) {
+
+                    String respString = response.body().string();
+                    ServicesRequest req1 = gson.fromJson(respString, ServicesRequest.class);
+                    MySubscriptions.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "YOUR REPAIR REQUEST IS SENT, "+"YOUR REQUEST No : " + req1.id.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    tvMysubsError.setText("Sending request Error!");
+                }
+            }
+        });
+
+
+    }
+
 
 }

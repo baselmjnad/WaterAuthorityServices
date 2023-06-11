@@ -11,9 +11,25 @@ public class Consumer {
     public String consumerPhone;
     public String consumerAddress;
     public User user;
-
+    public String consumerGender;
+    public Integer consumerAge;
     public List<Subscription> subscriptions;
 
+    public String getConsumerGender() {
+        return consumerGender;
+    }
+
+    public void setConsumerGender(String consumerGender) {
+        this.consumerGender = consumerGender;
+    }
+
+    public Integer getConsumerAge() {
+        return consumerAge;
+    }
+
+    public void setConsumerAge(Integer consumerAge) {
+        this.consumerAge = consumerAge;
+    }
 
     public Integer getId() {
         return id;

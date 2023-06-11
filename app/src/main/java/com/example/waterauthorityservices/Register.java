@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.gson.Gson;
 
@@ -30,22 +32,45 @@ import okhttp3.Response;
 
 public class Register extends AppCompatActivity {
     EditText etConsumerName, etConsumerAddress, etConsumerPhone, etRegisterUserName, etRegisterPassword, etPasswordConfirm;
-    TextView tvError;
+    SeekBar seekBarAge;
+    ToggleButton toggleGender;
+    TextView tvError,tvAge;
     Consumer consumer = new Consumer();
     Helper helper = new Helper();
     Boolean userExist = true;
+    Integer age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        toggleGender=findViewById(R.id.toggleGender);
+        seekBarAge=findViewById(R.id.seekBarAge);
         etConsumerName = findViewById(R.id.etConsumerName);
+        tvAge = findViewById(R.id.tvAge);
         etConsumerAddress = findViewById(R.id.etConsumerAddress);
         etConsumerPhone = findViewById(R.id.etConsumerPhone);
         etRegisterUserName = findViewById(R.id.etRegisterUserName);
         etRegisterPassword = findViewById(R.id.etRegisterPassword);
         etPasswordConfirm = findViewById(R.id.etPasswordConfirm);
         tvError = findViewById(R.id.tvError);
+        seekBarAge.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            tvAge.setText("Age: "+progress);
+            age=progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     public void RegisterNewConsumer(View view) {
@@ -108,6 +133,12 @@ public class Register extends AppCompatActivity {
         user1.password = etRegisterPassword.getText().toString().trim();
         user1.userType = "consumer";
         user1.accountActive = false;
+        consumer.consumerAge=age;
+        if(toggleGender.isChecked()){
+            consumer.consumerGender="male";
+        }else {
+            consumer.consumerGender="female";
+        }
         consumer.consumerName = etConsumerName.getText().toString().trim();
         consumer.consumerAddress = etConsumerAddress.getText().toString().trim();
         consumer.consumerPhone = etConsumerPhone.getText().toString().trim();

@@ -237,6 +237,7 @@
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_marginRight="25dp"
+                    android:onClick="GotoRepair"
                     app:icon="@drawable/twotone_precision_manufacturing_24"
                     app:iconGravity="textStart"
                     app:iconSize="60dp" />
