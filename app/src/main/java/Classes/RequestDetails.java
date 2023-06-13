@@ -2,10 +2,18 @@ package Classes;
 
 public class RequestDetails {
     public Integer id;
-    public Byte[] document;
+    public byte[] document;
     public String newSubAddress;
     public String newSubType;
-    public Integer requestId;
+
+
+    public byte[] getDocument() {
+        return document;
+    }
+
+    public void setDocument(byte[] document) {
+        this.document = document;
+    }
 
     public Integer getId() {
         return id;
@@ -15,13 +23,6 @@ public class RequestDetails {
         this.id = id;
     }
 
-    public Byte[] getDocument() {
-        return document;
-    }
-
-    public void setDocument(Byte[] document) {
-        this.document = document;
-    }
 
     public String getNewSubAddress() {
         return newSubAddress;
@@ -39,11 +40,4 @@ public class RequestDetails {
         this.newSubType = newSubType;
     }
 
-    public Integer getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(Integer requestId) {
-        this.requestId = requestId;
-    }
 }
