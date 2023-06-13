@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -236,7 +238,7 @@ public class NewMeter extends AppCompatActivity implements AdapterView.OnItemSel
                         NewMeter.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(getApplicationContext(), "YOUR NEW METER REQUEST IS SENT, " + "YOUR REQUEST No : " + respo, Toast.LENGTH_LONG).show();
+                                ShowMesBox(respo);
                             }
                         });
                     } else {
@@ -247,6 +249,24 @@ public class NewMeter extends AppCompatActivity implements AdapterView.OnItemSel
         } else {
             tvNewMeterError.setText("Please take photo for Apartment document");
         }
+    }
+
+    private void ShowMesBox(String reqNo) {
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(NewMeter.this);
+        builder.setTitle("Success");
+        builder.setMessage("Your now Meter request No is: "+reqNo);
+        builder.setIcon(R.drawable.baseline_check_circle_24);
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            finish();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
