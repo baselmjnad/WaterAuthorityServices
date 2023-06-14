@@ -170,6 +170,11 @@ public class MySubscriptions extends AppCompatActivity {
                     intent.putExtra("barcode", listy.get(position).consumerBarCode);
                     startActivity(intent);
                 }
+                if (t1.getStringExtra("type").equals("status")) {
+                    Intent intent = new Intent(MySubscriptions.this, RequestsStatus.class);
+                    intent.putExtra("barcode", listy.get(position).consumerBarCode);
+                    startActivity(intent);
+                }
                 if (t1.getStringExtra("type").equals("clearance")) {
 
                     ShowBoxOfClearance(listy.get(position));

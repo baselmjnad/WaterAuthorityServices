@@ -193,6 +193,7 @@
                     android:id="@+id/button201"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
+                    android:onClick="GotoRequestsStatus"
                     app:icon="@drawable/twotone_fact_check_24"
                     app:iconGravity="textStart"
                     app:iconSize="60dp" />

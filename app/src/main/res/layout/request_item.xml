@@ -11,7 +11,6 @@
         android:layout_margin="15dp"
         android:layout_weight="4"
         app:cardCornerRadius="5dp"
-
         app:cardElevation="5dp">
 
         <LinearLayout
@@ -27,10 +26,10 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/ivItemImage1"
+                    android:id="@+id/ivItemImage2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/paid" />
+                    app:srcCompat="@drawable/request_completed" />
             </LinearLayout>
 
             <LinearLayout
@@ -41,14 +40,14 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/textView2000"
+                    android:id="@+id/textView500"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Year"
+                    android:text="Request type"
                     android:textColor="@color/purple_500" />
 
                 <TextView
-                    android:id="@+id/tvItemYear"
+                    android:id="@+id/tvItemReqType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -56,14 +55,14 @@
                     android:text="TextView" />
 
                 <TextView
-                    android:id="@+id/textView2001"
+                    android:id="@+id/textView501"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cycle"
+                    android:text="Request Date"
                     android:textColor="@color/purple_500" />
 
                 <TextView
-                    android:id="@+id/tvItemCycle"
+                    android:id="@+id/tvItemReqDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -80,31 +79,31 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/textView2002"
+                    android:id="@+id/textView502"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Value"
+                    android:text="Request No."
                     android:textColor="@color/purple_500" />
 
                 <TextView
-                    android:textStyle="bold"
-                    android:id="@+id/tvItemValue"
+                    android:id="@+id/tvItemReqNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="TextView"
                     android:textColor="@color/purple_500"
-                android:layout_marginBottom="10dp"
-                    android:text="TextView" />
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView2003"
+                    android:id="@+id/textView503"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Status"
                     android:textColor="@color/purple_500" />
 
                 <TextView
-                    android:id="@+id/tvItemStatus"
+                    android:id="@+id/tvItemReqStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
