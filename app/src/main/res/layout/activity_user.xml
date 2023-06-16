@@ -259,6 +259,7 @@
                     android:id="@+id/button301"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
+                    android:onClick="GotoTransfer"
                     app:icon="@drawable/twotone_group_24"
                     app:iconGravity="textStart"
                     app:iconSize="60dp" />
@@ -268,7 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Replace consumer" />
+                    android:text="Ownership Transfer" />
             </LinearLayout>
 
         </LinearLayout>

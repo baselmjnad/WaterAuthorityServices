@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,8 +42,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class AttachSubscriptions extends AppCompatActivity {
-    String userName, userId;
+    String userName, userId, requestType;
     EditText etSearchBarcode;
+
     LinearLayout llSubs;
     TextView tvAttachWelcome, tvAttachError;
     TextView tvMyAttachConsumerName, tvAttachPhone, tvAttachAddress;
@@ -68,6 +72,7 @@ public class AttachSubscriptions extends AppCompatActivity {
         Intent t = getIntent();
         userName = t.getStringExtra("userName");
         userId = t.getStringExtra("userId");
+        requestType = t.getStringExtra("type");
         tvAttachWelcome.setText("User: " + userName.toUpperCase());
         llSubs.setVisibility(View.INVISIBLE);
         GetConsumer(userId);
@@ -225,8 +230,9 @@ public class AttachSubscriptions extends AppCompatActivity {
 
     }
 
+
     public void SendRequest(View view) {
-        AlertDialog.Builder builder=new AlertDialog.Builder(AttachSubscriptions.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(AttachSubscriptions.this);
         builder.setTitle("Confirmation!!");
         builder.setIcon(R.drawable.twotone_fmd_bad_24);
         builder.setMessage("Are you sure this subscription belongs to you?");
@@ -234,15 +240,18 @@ public class AttachSubscriptions extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Send();
+                    Send();
             }
         });
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();           }
+                dialog.cancel();
+            }
         });
-        AlertDialog alertDialog=builder.create();
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+
 }

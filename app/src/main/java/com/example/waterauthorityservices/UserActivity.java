@@ -39,7 +39,15 @@ public class UserActivity extends AppCompatActivity {
         Intent intent=new Intent(UserActivity.this,AttachSubscriptions.class);
         intent.putExtra("userName",tt.getStringExtra("userName") );
         intent.putExtra("userId",tt.getStringExtra("userId"));
+        intent.putExtra("type","attach");
         startActivity(intent);
+    }
+    public void GotoTransfer(View view){
+        Intent ttt2=getIntent();
+        Intent intent1=new Intent(UserActivity.this, Ownership.class);
+        intent1.putExtra("userName",ttt2.getStringExtra("userName") );
+        intent1.putExtra("userId",ttt2.getStringExtra("userId"));
+        startActivity(intent1);
     }
     public void GotoClearanceRequest(View view){
         Intent ttt=getIntent();

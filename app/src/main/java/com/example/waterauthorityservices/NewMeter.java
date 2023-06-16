@@ -53,8 +53,6 @@ public class NewMeter extends AppCompatActivity implements AdapterView.OnItemSel
     String userName, userId, meterType;
     Integer pic_id = 123;
     byte[] photArray;
-    private static final int CAMERA_PHOTO = 111;
-    private Uri imageToUploadUri;
 
     EditText etNewMeterAddress;
     ImageView imageViewDoc;
@@ -160,6 +158,7 @@ public class NewMeter extends AppCompatActivity implements AdapterView.OnItemSel
         startActivityForResult(camera_intent, pic_id);
     }
 
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -256,7 +255,7 @@ public class NewMeter extends AppCompatActivity implements AdapterView.OnItemSel
 
         AlertDialog.Builder builder = new AlertDialog.Builder(NewMeter.this);
         builder.setTitle("Success");
-        builder.setMessage("Your now Meter request No is: "+reqNo);
+        builder.setMessage("Your new Meter request No is: "+reqNo);
         builder.setIcon(R.drawable.baseline_check_circle_24);
         builder.setCancelable(false);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
