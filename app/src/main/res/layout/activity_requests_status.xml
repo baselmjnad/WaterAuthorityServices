@@ -12,21 +12,46 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
+        app:cardElevation="10dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
 
             <TextView
-                android:id="@+id/tvRequestBarcode"
+                android:id="@+id/tvMyReqConsumerName"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:drawableLeft="@drawable/twotone_qr_code_24"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/twotone_person_24"
                 android:drawablePadding="10dp"
-                android:text="Barcode"
+                android:text="Full Name"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvMyReqPhone"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/twotone_phone_android_24"
+                android:drawablePadding="10dp"
+                android:text="Phone number"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvMyReqAddress"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:drawableLeft="@drawable/twotone_location_on_24"
+                android:drawablePadding="10dp"
+                android:text="Address"
                 android:textSize="18sp" />
 
 
@@ -37,9 +62,7 @@
                 android:text=""
                 android:textColor="@color/Red"
                 android:textSize="14dp" />
-
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
     <ListView
@@ -47,4 +70,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
 </LinearLayout>
+
+
+

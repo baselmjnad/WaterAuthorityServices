@@ -76,10 +76,9 @@ public class UserActivity extends AppCompatActivity {
     }
     public void GotoRequestsStatus(View view){
         Intent ttt=getIntent();
-        Intent intent=new Intent(UserActivity.this,MySubscriptions.class);
+        Intent intent=new Intent(UserActivity.this,RequestsStatus.class);
         intent.putExtra("userName",ttt.getStringExtra("userName") );
         intent.putExtra("userId",ttt.getStringExtra("userId"));
-        intent.putExtra("type","status");
         startActivity(intent);
     }
 }

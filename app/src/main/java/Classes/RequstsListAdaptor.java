@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class RequstsListAdaptor extends ArrayAdapter<ServicesRequest> {
-    public RequstsListAdaptor(Context context2, ArrayList<ServicesRequest> requests) {
+public class RequstsListAdaptor extends ArrayAdapter<RequestVM> {
+    public RequstsListAdaptor(Context context2, ArrayList<RequestVM> requests) {
         super(context2, R.layout.request_item, requests);
     }
 
@@ -31,7 +31,8 @@ public class RequstsListAdaptor extends ArrayAdapter<ServicesRequest> {
     @Override
     public View getView(int position, @Nullable View view1, @NonNull ViewGroup parent2) {
 
-        ServicesRequest request = getItem(position);
+//        ServicesRequest request = getItem(position);
+        RequestVM request=getItem(position);
         if (view1 == null) {
             view1 = LayoutInflater.from(getContext()).inflate(R.layout.request_item, parent2, false);
         }
@@ -40,25 +41,30 @@ public class RequstsListAdaptor extends ArrayAdapter<ServicesRequest> {
         TextView tvItemReqType = view1.findViewById(R.id.tvItemReqType);
         TextView tvItemReqDate = view1.findViewById(R.id.tvItemReqDate);
         TextView tvItemReqNo = view1.findViewById(R.id.tvItemReqNo);
+        TextView tvReqBarcode = view1.findViewById(R.id.tvReqBarcode);
         TextView tvItemReqStatus = view1.findViewById(R.id.tvItemReqStatus);
 
-        tvItemReqType.setText(request.requestType);
+        tvItemReqType.setText(request.request.requestType);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(request.requestDate);
+        calendar.setTime(request.request.requestDate);
         String ss=String.valueOf(calendar.get(calendar.DAY_OF_MONTH))+"-"+String.valueOf(calendar.get(calendar.MONTH))+"-"+String.valueOf(calendar.get(calendar.YEAR ));
         tvItemReqDate.setText(ss);
+        if(request.request.subscription!=null){
+            tvReqBarcode.setText(request.request.subscription.consumerBarCode);
+        }else {
+            tvReqBarcode.setText("No Barcode");
+        }
+        tvItemReqStatus.setText(request.request.requestStatus);
+        tvItemReqNo.setText(String.valueOf(request.request.id));
 
-        tvItemReqStatus.setText(request.requestStatus);
-        tvItemReqNo.setText(String.valueOf(request.id));
-
-        if (request.requestStatus.equals("completed")) {
+        if (request.request.requestStatus.equals("completed")) {
             ivItemImage2.setImageResource(R.drawable.request_completed);
         }
-        if (request.requestStatus.equals("onprogress")) {
+        if (request.request.requestStatus.equals("onprogress")) {
             ivItemImage2.setImageResource(R.drawable.request_pending);
         }
-        if (request.requestStatus.equals("rejected")) {
+        if (request.request.requestStatus.equals("rejected")) {
             ivItemImage2.setImageResource(R.drawable.request_rejected1);
         }
 

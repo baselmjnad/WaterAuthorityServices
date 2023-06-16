@@ -220,6 +220,7 @@ public class Ownership extends AppCompatActivity {
             department.departmentName = "DocumentControllerDep";
             department.id = 1;
             req.consumer = consumer1;
+            req.subscription=subscription1;
             req.requestDate = Calendar.getInstance().getTime();
             req.requestType = "transfer";
             req.requestStatus = "onprogress";
