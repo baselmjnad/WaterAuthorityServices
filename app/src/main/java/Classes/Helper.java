@@ -1,5 +1,7 @@
 package Classes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,10 +11,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.waterauthorityservices.AttachSubscriptions;
+import com.example.waterauthorityservices.NewMeter;
 import com.example.waterauthorityservices.R;
 import com.google.gson.Gson;
 
@@ -136,3 +138,21 @@ public class Helper {
 //    }
 //}
 //--------------------PHOTO HANDLING end---------------------------------------
+
+//    private void ShowMesBox(String reqNo) {
+//
+//
+//        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(NewMeter.this);
+//        builder.setTitle("Success");
+//        builder.setMessage("Your new Meter request No is: "+reqNo);
+//        builder.setIcon(R.drawable.baseline_check_circle_24);
+//        builder.setCancelable(false);
+//        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                finish();
+//            }
+//        });
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//    }

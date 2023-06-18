@@ -216,9 +216,8 @@ public class AttachSubscriptions extends AppCompatActivity {
                     AttachSubscriptions.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "YOUR REQUEST IS SENT", Toast.LENGTH_LONG).show();
-                            tvAttachError.setText("YOUR REQUEST No : " + req1.id.toString());
                             llSubs.setVisibility(View.INVISIBLE);
+                            ShowMesBox(req1.id.toString());
                         }
                     });
                 } else {
@@ -250,6 +249,23 @@ public class AttachSubscriptions extends AppCompatActivity {
             }
         });
         AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    private void ShowMesBox(String msg) {
+
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(AttachSubscriptions.this);
+        builder.setTitle("Success");
+        builder.setMessage("Your request No is: "+ msg);
+        builder.setIcon(R.drawable.baseline_check_circle_24);
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        android.app.AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 

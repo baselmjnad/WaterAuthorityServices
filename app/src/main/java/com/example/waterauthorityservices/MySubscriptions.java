@@ -78,7 +78,7 @@ public class MySubscriptions extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String res = response.body().string();
                     Consumer consumer = gson.fromJson(res, Consumer.class);
-                    consumer1=consumer;
+                    consumer1 = consumer;
                     MySubscriptions.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -189,6 +189,25 @@ public class MySubscriptions extends AppCompatActivity {
 
     }
 
+    private void ShowMesBox(String msg) {
+
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MySubscriptions.this);
+        builder.setTitle("Success");
+        builder.setMessage("Your request No is: " + msg);
+        builder.setIcon(R.drawable.baseline_check_circle_24);
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        android.app.AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
     public void ShowBoxOfClearance(Subscription subscription) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MySubscriptions.this);
         builder.setTitle("Confirmation!!");
@@ -259,7 +278,7 @@ public class MySubscriptions extends AppCompatActivity {
                     MySubscriptions.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "YOUR CLEARANCE REQUEST IS SENT, "+"YOUR REQUEST No : " + req1.id.toString(), Toast.LENGTH_LONG).show();
+                            ShowMesBox(req1.id.toString());
                         }
                     });
                 } else {
@@ -270,6 +289,7 @@ public class MySubscriptions extends AppCompatActivity {
 
 
     }
+
     public void ShowBoxOfRepair(Subscription subscription) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MySubscriptions.this);
         builder.setTitle("Confirmation!!");
@@ -292,6 +312,7 @@ public class MySubscriptions extends AppCompatActivity {
         alertDialog.show();
 
     }
+
     public void SendRepairRequest(Subscription subscription1) {
         ServicesRequest req = new ServicesRequest();
         Department department = new Department();
@@ -339,7 +360,7 @@ public class MySubscriptions extends AppCompatActivity {
                     MySubscriptions.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "YOUR REPAIR REQUEST IS SENT, "+"YOUR REQUEST No : " + req1.id.toString(), Toast.LENGTH_LONG).show();
+                            ShowMesBox(req1.id.toString());
                         }
                     });
                 } else {

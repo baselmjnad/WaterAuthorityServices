@@ -166,8 +166,9 @@ public class NewMeter extends AppCompatActivity implements AdapterView.OnItemSel
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imageViewDoc.setImageBitmap(photo);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             photArray = baos.toByteArray();
+
             try {
                 baos.close();
             } catch (IOException e) {

@@ -174,11 +174,11 @@ public class Ownership extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == pic_id && requestCode==RESULT_OK && data!=null) {
+        if (requestCode == pic_id && resultCode==RESULT_OK && data!=null) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imCamera.setImageBitmap(photo);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             photArray = baos.toByteArray();
             try {
                 baos.close();
