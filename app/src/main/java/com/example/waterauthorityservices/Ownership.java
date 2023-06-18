@@ -174,7 +174,7 @@ public class Ownership extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == pic_id) {
+        if (requestCode == pic_id && requestCode==RESULT_OK && data!=null) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imCamera.setImageBitmap(photo);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
