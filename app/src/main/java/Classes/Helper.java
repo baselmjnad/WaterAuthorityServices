@@ -30,6 +30,7 @@ import okhttp3.Response;
 public class Helper {
 
     public String MainUrl = "http://www.wcsapi23.somee.com/";
+//    public String MainUrl = "http://10.0.2.2:7186/";
 }
 
 //-----------------------GET Method with OBJECT response-----------------------------------------------------------

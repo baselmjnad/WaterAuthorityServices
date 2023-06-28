@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +79,7 @@ public class MyInvoices extends AppCompatActivity {
                             list1 = userArray1;
                             if (list1.size()== 0 || list1.isEmpty()) {
                                 tvError.setText("No Invoices for this subscription!!");
+
                             }else {
                                 list1 = userArray1;
                                 Dodo(list1);
@@ -101,7 +103,6 @@ public class MyInvoices extends AppCompatActivity {
             }
             tvInvoicesTotal.setText("not paid amount "+sum.toString()+" S.P");
             InvoicesListAdaptor listAdaptor1 = new InvoicesListAdaptor(MyInvoices.this, list2);
-
             binding.lvInvoices.setAdapter(listAdaptor1);
             binding.lvInvoices.setClickable(true);
             binding.lvInvoices.setOnItemClickListener(new AdapterView.OnItemClickListener() {

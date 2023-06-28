@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -30,6 +31,7 @@ public class Login extends AppCompatActivity {
     Button btLogin;
     EditText etUsername, etPassword;
     TextView tvError;
+    ProgressBar pbLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,15 @@ public class Login extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         tvError = findViewById(R.id.tvError);
+        pbLogin=findViewById(R.id.pbLogin);
+        pbLogin.setVisibility(View.INVISIBLE);
+
     }
 
 
     public void LoginUser(View view) {
         tvError.setText("");
+        pbLogin.setVisibility(View.VISIBLE);
         if (!TextUtils.isEmpty(etUsername.getText().toString()) && !TextUtils.isEmpty(etPassword.getText().toString())) {
 
             OkHttpClient client = new OkHttpClient();
@@ -89,12 +95,17 @@ public class Login extends AppCompatActivity {
                                 Intent intent=new Intent(Login.this,UserActivity.class);
                                 intent.putExtra("userName",logedUser.userName );
                                 intent.putExtra("userId",logedUser.id.toString());
+                                pbLogin.setVisibility(View.INVISIBLE);
                                 startActivity(intent);
                             }
                         });}else {
+                            pbLogin.setVisibility(View.INVISIBLE);
+
                             tvError.setText("User not Active or not consumer");
                         }
                     } else {
+                        pbLogin.setVisibility(View.INVISIBLE);
+
                         tvError.setText("Username and/or password not correct");
                     }
                 }
@@ -103,6 +114,7 @@ public class Login extends AppCompatActivity {
             //response end--------------------------------------------------
 
         }else {
+            pbLogin.setVisibility(View.INVISIBLE);
             tvError.setText("User Name or Password is missing!");
         }
     }
